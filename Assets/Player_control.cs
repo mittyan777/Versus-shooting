@@ -28,9 +28,19 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        float MoveX = move.x ;
-        float MoveY = move.y;
-        transform.position += transform.right * MoveX * 2* Time.deltaTime;
-        transform.position += transform.up * MoveY * 2 * Time.deltaTime;
+        if (gameObject.name == "Player1(Clone)")
+        {
+            float MoveX = move.x;
+            float MoveY = move.y;
+            transform.position += transform.right * MoveX * 2 * Time.deltaTime;
+            transform.position += transform.up * MoveY * 2 * Time.deltaTime;
+        }
+        else if(gameObject.name == "Player2(Clone)")
+        {
+            float MoveX = move.x;
+            float MoveY = move.y;
+            transform.position -= transform.right * MoveX * 2 * Time.deltaTime;
+            transform.position -= transform.up * MoveY * 2 * Time.deltaTime;
+        }
     }
 }
