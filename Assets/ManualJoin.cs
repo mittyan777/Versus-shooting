@@ -10,28 +10,34 @@ public class ManualJoin : MonoBehaviour
     private Dictionary<Gamepad, bool> deviceJoined = new Dictionary<Gamepad, bool>();
     private int playerCount = 0;
 
-    void Update()
+    void Start()
     {
+        // ゲーム開始時に全ての接続済みコントローラーを確認
         foreach (var device in Gamepad.all)
         {
             if (!deviceJoined.ContainsKey(device))
                 deviceJoined[device] = false;
 
-            // まだ生成されていないデバイスだけ処理
             if (!deviceJoined[device])
             {
-                if (device.buttonSouth.wasPressedThisFrame && playerCount == 0)
+                if (playerCount == 0)
                 {
                     PlayerInput.Instantiate(player1Prefab, pairWithDevice: device);
-                    deviceJoined[device] = true;
-                    playerCount++;
+                    Debug.Log($"Player1 joined with {device.displayName}");
                 }
-                else if (device.buttonEast.wasPressedThisFrame && playerCount == 1)
+                else if (playerCount == 1)
                 {
                     PlayerInput.Instantiate(player2Prefab, pairWithDevice: device);
-                    deviceJoined[device] = true;
-                    playerCount++;
+                    Debug.Log($"Player2 joined with {device.displayName}");
                 }
+                else
+                {
+                    Debug.Log("すでに2人まで参加しています。");
+                    break;
+                }
+
+                deviceJoined[device] = true;
+                playerCount++;
             }
         }
     }
