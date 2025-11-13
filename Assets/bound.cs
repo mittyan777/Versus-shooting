@@ -25,4 +25,19 @@ public class bound : MonoBehaviour
         // âEéŒÇﬂ45ìxÇ…êiÇﬁ
         myRigidbody.velocity = new Vector3(speed, speed, 0f);
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       
+        if (collision.gameObject.tag == "tama")
+        {
+            if (gameObject.name == "Obstacle(Clone)")
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+      
+    }
 }

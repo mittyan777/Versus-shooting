@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6657796884506553228}
   - component: {fileID: 1163179497656153950}
   m_Layer: 0
-  m_Name: kaihuku
-  m_TagString: kaihuku
+  m_Name: power_up
+  m_TagString: shooting_Type1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

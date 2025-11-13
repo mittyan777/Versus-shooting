@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -14,6 +14,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] GameObject Player2_shootPos;
     float HP = 50;
     [SerializeField]Slider HP_slider;
+    int shootType = 0;
+    [SerializeField]float flagtime = 0;
+    bool Rapid_fire_flag = false;
+    [SerializeField]float shootingvalue;
 
     void Awake()
     {
@@ -29,17 +33,52 @@ public class PlayerControl : MonoBehaviour
     {
         move2 = value.Get<Vector2>();
     }
-    public void OnFire()
+    public void OnFire(InputValue value)
     {
-        if (gameObject.name == "Player1(Clone)")
+        shootingvalue = value.Get<float>();
+        if (shootType == 0)
         {
-           Instantiate(Player1_tama, Player1_shootPos.transform.position, this.transform.rotation);
+            if (shootingvalue == 1)
+            {
+                if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
+                {
+                    Instantiate(Player1_tama, Player1_shootPos.transform.position, this.transform.rotation);
+                    flagtime = 0.1f;
+                }
+                else if (gameObject.name == "Player2(Clone)" && flagtime <= 0)
+                {
+                    Instantiate(Player2_tama, Player2_shootPos.transform.position, this.transform.rotation);
+                    flagtime = 0.1f;
+                }
+            }
         }
-        else
+        else if(shootType == 1)
         {
-            Instantiate(Player2_tama, Player2_shootPos.transform.position, this.transform.rotation);
+            Rapid_fire_flag = true;
         }
     }
+    void Rapid_fire()
+    {
+        if (Rapid_fire_flag == true)
+        {
+            if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
+            {
+                Instantiate(Player1_tama, Player1_shootPos.transform.position, this.transform.rotation);
+                flagtime = 0.1f;
+            }
+            else if (gameObject.name == "Player2(Clone)" && flagtime <= 0)
+            {
+                Instantiate(Player2_tama, Player2_shootPos.transform.position, this.transform.rotation);
+                flagtime = 0.1f;
+            }
+        }
+        if(shootingvalue == 0)
+        {
+            Rapid_fire_flag = false;
+        }
+      
+    }
+
     public void OnSelect()
     {
       
@@ -58,6 +97,9 @@ public class PlayerControl : MonoBehaviour
     }
     void FixedUpdate()
     {
+      
+        Rapid_fire();
+       flagtime -= Time.deltaTime;
         HP_slider.value = HP;
         if (gameObject.name == "Player1(Clone)")
         {
@@ -117,6 +159,11 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.tag == "kaihuku")
         {
             HP += 10;
+            Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "shooting_Type1")
+        {
+            shootType = 1;
             Destroy(collision.gameObject);
         }
     }

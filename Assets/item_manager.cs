@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class item_manager : MonoBehaviour
 {
-    [SerializeField] GameObject kaihuku;
+    [SerializeField] GameObject []item;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("item_spawn", 10, 20);
+        InvokeRepeating("item_spawn", 10, Random.Range(15,25));
     }
 
     // Update is called once per frame
@@ -18,6 +18,8 @@ public class item_manager : MonoBehaviour
     }
     void item_spawn()
     {
-        Instantiate(kaihuku, transform.position, Quaternion.identity);
+       
+        Instantiate(item[Random.Range(0, 3)], transform.position, Quaternion.identity) ;
     }
+   
 }
