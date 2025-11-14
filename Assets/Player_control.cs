@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -10,14 +11,17 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] GameObject Player1_tama;
     [SerializeField] GameObject Player2_tama;
+    [SerializeField] GameObject shootType2_tama;
     [SerializeField] GameObject Player1_shootPos;
     [SerializeField] GameObject Player2_shootPos;
     float HP = 50;
     [SerializeField]Slider HP_slider;
-    int shootType = 0;
+    [SerializeField]int shootType = 0;
     [SerializeField]float flagtime = 0;
     bool Rapid_fire_flag = false;
     [SerializeField]float shootingvalue;
+    [SerializeField] GameObject Barrier;
+    [SerializeField] bool barrier = false;
 
     void Awake()
     {
@@ -56,6 +60,22 @@ public class PlayerControl : MonoBehaviour
         {
             Rapid_fire_flag = true;
         }
+        else if (shootType == 2)
+        {
+            if (shootingvalue == 1)
+            {
+                if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
+                {
+                    Instantiate(shootType2_tama, Player1_shootPos.transform.position, this.transform.rotation);
+                    flagtime = 0.1f;
+                }
+                else if (gameObject.name == "Player2(Clone)" && flagtime <= 0)
+                {
+                    Instantiate(shootType2_tama, Player2_shootPos.transform.position, this.transform.rotation);
+                    flagtime = 0.1f;
+                }
+            }
+        }
     }
     void Rapid_fire()
     {
@@ -90,7 +110,7 @@ public class PlayerControl : MonoBehaviour
         {
             HP_slider = GameObject.Find("Player1_slider").GetComponent<Slider>();
         }
-        else if (gameObject.name == "Player2(Clone)")
+        if (gameObject.name == "Player2(Clone)")
         {
             HP_slider = GameObject.Find("Player2_slider").GetComponent<Slider>();
         }
@@ -149,8 +169,16 @@ public class PlayerControl : MonoBehaviour
     {
         if(collision.gameObject.tag == "tama")
         {
-            HP -= 1;
-            Destroy(collision.gameObject);
+            if (barrier == false)
+            {
+                HP -= 1;
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+            }
+            
         }
     
     }
@@ -166,5 +194,35 @@ public class PlayerControl : MonoBehaviour
             shootType = 1;
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.tag == "shooting_Type2")
+        {
+            shootType = 2;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Barrier")
+        {
+            Barrier.SetActive(true);
+            barrier = true;
+            Invoke("BarrierOF", 5);
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "tama")
+        {
+            if (barrier == false)
+            {
+                HP -= 1;
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+            }
+
+        }
+    }
+    void BarrierOF()
+    {
+        Barrier.SetActive(false);
+        barrier = false;
     }
 }

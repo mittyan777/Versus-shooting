@@ -19,7 +19,7 @@ public class item_manager : MonoBehaviour
     void item_spawn()
     {
        
-        Instantiate(item[Random.Range(0, 3)], transform.position, Quaternion.identity) ;
+        Instantiate(item[Random.Range(0, 5)], transform.position, Quaternion.identity) ;
     }
    
 }

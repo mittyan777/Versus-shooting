@@ -17,6 +17,8 @@ TagManager:
   - tama
   - kaihuku
   - shooting_Type1
+  - Barrier
+  - shooting_Type2
   layers:
   - Default
   - TransparentFX

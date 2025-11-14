@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class gamemanager : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class gamemanager : MonoBehaviour
     [SerializeField] static int Round = 1;
     [SerializeField] static int player1_count = 0;
     [SerializeField] static int player2_count = 0;
+
+    [SerializeField] Image Fade_Image;
+    bool fade = false;
+    [SerializeField]float fadeCollar = 1;
+    int text_count = 0;
 
     bool Round_b = false;
     bool resultShown = false;
@@ -42,6 +48,9 @@ public class gamemanager : MonoBehaviour
 
         text2.fontMaterial.SetColor("_OutlineColor", Color.blue);
         text2.fontMaterial.SetFloat("_OutlineWidth", 0.15f);
+
+        Referee_Text[0].SetActive(false);
+        Referee_Text[1].SetActive(false);
     }
 
     void Update()
@@ -50,10 +59,15 @@ public class gamemanager : MonoBehaviour
         AnimatorStateInfo info2 = m_Animator2.GetCurrentAnimatorStateInfo(0);
 
         if (info.IsName("stop"))
+        {
             Referee_Text[0].SetActive(false);
+            text_count += 1;
+        }
 
         if (info2.IsName("stop"))
+        {
             Referee_Text[1].SetActive(false);
+        }
 
         // プレイヤーが倒れたか判定（まだ結果を表示していない時のみ）
         if (!resultShown)
@@ -81,6 +95,30 @@ public class gamemanager : MonoBehaviour
             Invoke("TitleScene", 5);
             resultShown = true;
         }
+
+        if(fade == false)
+        {
+            if (fadeCollar > 0)
+            {
+                fadeCollar -= Time.deltaTime;
+            }
+        }
+        if (fade == true )
+        {
+            if (fadeCollar < 1 && text_count >= 2)
+            {
+                fadeCollar += Time.deltaTime;
+            }
+        }
+
+        Fade_Image.GetComponent<Image>().color = new Color(0.0f, 0.0f, 0.0f, fadeCollar);
+        if(fadeCollar < 0f )
+        {
+            Debug.Log("uuu");
+            Referee_Text[0].SetActive(true);
+            Referee_Text[1].SetActive(true);
+            fadeCollar = 0f;
+        }
     }
 
     void ShowResult(int playerWin)
@@ -98,12 +136,12 @@ public class gamemanager : MonoBehaviour
         }
         else
         {
-            Referee_Text[0].GetComponent<TextMeshProUGUI>().text = "Loss";
-            Referee_Text[1].GetComponent<TextMeshProUGUI>().text = "Victory";
+            Referee_Text[0].GetComponent<TextMeshProUGUI>().text = "Victory";
+            Referee_Text[1].GetComponent<TextMeshProUGUI>().text = "Loss";
             player2_count++;
         }
-
-
+        fade = true;
+       
         Round++;
         Invoke("MainScene", 5);
     }
@@ -111,7 +149,7 @@ public class gamemanager : MonoBehaviour
     void ShowDraw()
     {
         resultShown = true;
-
+        fade = true;
         Referee_Text[0].SetActive(true);
         Referee_Text[1].SetActive(true);
 
@@ -131,6 +169,7 @@ public class gamemanager : MonoBehaviour
     void MainScene()
     {
         Round_b = false;
+
         SceneManager.LoadScene("Main");
     }
 
