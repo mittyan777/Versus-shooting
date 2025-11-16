@@ -297,7 +297,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collision.gameObject.tag == "kaihuku")
         {
-            HP += 10;
+            HP += 30;
             Destroy(collision.gameObject);
         }
         if(collision.gameObject.tag == "shooting_Type1")
