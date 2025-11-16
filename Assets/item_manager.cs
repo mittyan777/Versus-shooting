@@ -8,7 +8,7 @@ public class item_manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("item_spawn", 10, Random.Range(15,25));
+        InvokeRepeating("item_spawn", 10, Random.Range(10,15));
     }
 
     // Update is called once per frame

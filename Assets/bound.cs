@@ -38,6 +38,24 @@ public class bound : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-      
+        if (gameObject.name == "Obstacle(Clone)")
+        {
+            
+                BoxCollider2D myCol = GetComponent<BoxCollider2D>();
+                CircleCollider2D playerCol = collision.gameObject.GetComponent<CircleCollider2D>();
+              
+                if (myCol != null && playerCol != null)
+                {
+                    Physics2D.IgnoreCollision(myCol, playerCol, true);
+                }
+            
+        }
+        if (collision.gameObject.tag == "tama")
+        {
+            if (gameObject.name == "Obstacle(Clone)")
+            {
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }

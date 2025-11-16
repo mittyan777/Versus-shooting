@@ -161,3 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7fbe6e186b3b6944ba48a2dc0843035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start_Transform: {x: 0, y: 0}
+  distance: 0
+  damage: 10
+  Player1: 1

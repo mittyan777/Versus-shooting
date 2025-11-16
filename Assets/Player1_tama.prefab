@@ -98,7 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7fbe6e186b3b6944ba48a2dc0843035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 8244777457996222797, guid: 35922674c005fc24287c7857b1f6c53e, type: 3}
+  start_Transform: {x: 0, y: 0}
+  distance: 0
+  damage: 10
+  Player1: 1
 --- !u!58 &180159459067630739
 CircleCollider2D:
   m_ObjectHideFlags: 0

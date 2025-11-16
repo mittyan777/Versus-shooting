@@ -92,7 +92,10 @@ public class gamemanager : MonoBehaviour
         // 2本先取したらタイトルへ
         if (player1_count == 2 || player2_count == 2)
         {
+            Round = 1;
             Invoke("TitleScene", 5);
+            player1_count = 0;
+            player2_count = 0;
             resultShown = true;
         }
 
