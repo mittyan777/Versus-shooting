@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class bound : MonoBehaviour
 {
@@ -8,9 +10,18 @@ public class bound : MonoBehaviour
    float speed;
     Rigidbody2D myRigidbody;
     int choice;
-
+    float HP = 50;
+    Animator animator;
+    [SerializeField] TextMeshProUGUI Damagetext;
+    Text a;
+    [SerializeField] float Damage_Time = 0;
+    [SerializeField] GameObject Explosion;
+    float Damage = 0;
     void Start()
     {
+      
+        if (gameObject.name == "Obstacle(Clone)") { animator = Damagetext.GetComponent<Animator>(); }
+            
         choice = Random.Range(0, 2);
         if (choice == 0)
         {
@@ -25,6 +36,35 @@ public class bound : MonoBehaviour
         // âEéŒÇﬂ45ìxÇ…êiÇﬁ
         myRigidbody.velocity = new Vector3(speed, speed, 0f);
     }
+    private void Update()
+    {
+        if (gameObject.name == "Obstacle(Clone)")
+        {
+            if (Damage_Time <= 0.5f)
+            {
+                animator.SetBool("damage", false);
+            }
+            if (Damage_Time <= 0)
+            {
+                Damagetext.text = "";
+                Damage = 0;
+
+            }
+            else
+            {
+                Damagetext.fontMaterial.SetColor("_OutlineColor", Color.white);
+                Damagetext.text = ($"{Damage}");
+
+            }
+            if(HP <= 0)
+            {
+                Instantiate(Explosion, transform.position, this.transform.rotation);
+                Destroy(gameObject);
+            }
+            Damage_Time -= Time.deltaTime;
+        }
+        //Damagetext.text = ($"{a}");
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
        
@@ -32,28 +72,25 @@ public class bound : MonoBehaviour
         {
             if (gameObject.name == "Obstacle(Clone)")
             {
+                Damage_Time = 1;
+                HP -= 10;
+                Damage += 10;
+                animator.SetBool("damage", true);
                 Destroy(collision.gameObject);
             }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (gameObject.name == "Obstacle(Clone)")
-        {
-            
-                BoxCollider2D myCol = GetComponent<BoxCollider2D>();
-                CircleCollider2D playerCol = collision.gameObject.GetComponent<CircleCollider2D>();
-              
-                if (myCol != null && playerCol != null)
-                {
-                    Physics2D.IgnoreCollision(myCol, playerCol, true);
-                }
-            
-        }
+     
         if (collision.gameObject.tag == "tama")
         {
             if (gameObject.name == "Obstacle(Clone)")
             {
+                Damage_Time = 1;
+                HP -= 10;
+                Damage += 10;
+                animator.SetBool("damage", true);
                 Destroy(collision.gameObject);
             }
         }

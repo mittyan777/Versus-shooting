@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.67, y: 1.93, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1.25}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,13 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
-    type: 3}
-  m_Color: {r: 0.0061821938, g: 0, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7d59af1c1e7eb5b4a8d0e1cb2b9c79a1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.197, y: 1.238}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
 --- !u!114 &6657796884506553228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f46ec256853624e809ddc82c74d833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damagetext: {fileID: 0}
+  Damage_Time: 0
+  Explosion: {fileID: 0}
 --- !u!50 &1163179497656153950
 Rigidbody2D:
   serializedVersion: 4

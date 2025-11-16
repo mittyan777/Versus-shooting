@@ -29,7 +29,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] Sprite[]Player2;
     [SerializeField] GameObject Explosion;
     float Damage = 0;
-    [SerializeField]float Damage_Time = 3;
+    [SerializeField]float Damage_Time = 0;
     [SerializeField]TextMeshProUGUI Damagetext;
     float aim = 200;
     Animator animator;
@@ -141,6 +141,7 @@ public class PlayerControl : MonoBehaviour
             HP_slider = GameObject.Find("Player2_slider").GetComponent<Slider>();
         }
         animator = Damagetext.GetComponent<Animator>();
+        Damagetext.fontMaterial.SetColor("_OutlineColor", Color.white);
     }
     void FixedUpdate()
     {
@@ -278,7 +279,7 @@ public class PlayerControl : MonoBehaviour
             if (barrier == false)
             {
                 HP -= Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
-                Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-1.214f, -0.726f), Damagetext.rectTransform.localPosition.y, Damagetext.rectTransform.localPosition.z);
+                Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-0.15f, 0.15f), Damagetext.rectTransform.localPosition.y, Damagetext.rectTransform.localPosition.z);
                 animator.SetBool("damage",true);
                 Damage += Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage); 
                 Damage_Time = 1;

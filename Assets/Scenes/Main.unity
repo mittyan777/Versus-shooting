@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 477508841}
   - component: {fileID: 477508840}
   - component: {fileID: 477508839}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Static Sprite (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +812,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 7095
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1777,7 +1777,7 @@ GameObject:
   - component: {fileID: 1302235373}
   - component: {fileID: 1302235372}
   - component: {fileID: 1302235371}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Static Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2222,7 +2222,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 7031
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2385,7 +2385,7 @@ GameObject:
   - component: {fileID: 1622511779}
   - component: {fileID: 1622511778}
   - component: {fileID: 1622511777}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Static Sprite (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2634,7 +2634,7 @@ GameObject:
   - component: {fileID: 1928029977}
   - component: {fileID: 1928029976}
   - component: {fileID: 1928029975}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Static Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

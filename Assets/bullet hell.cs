@@ -24,7 +24,13 @@ public class bullethell : MonoBehaviour
         {
             distance = Vector2.Distance(start_Transform, GameObject.Find("Player1(Clone)").gameObject.transform.position);
         }
-        if (gameObject.name == "Player1_tama_shooting_Type2(Clone)")
+        if (gameObject.name == "Player1_tama_shooting_Type2(Clone)" )
+        {
+            myRigidbody = GetComponent<Rigidbody2D>();
+            // 右斜め45度に進む
+            myRigidbody.velocity = transform.up * 8;
+        }
+        else if(gameObject.name == "Player2_tama_shooting_Type2(Clone)")
         {
             myRigidbody = GetComponent<Rigidbody2D>();
             // 右斜め45度に進む
@@ -36,11 +42,11 @@ public class bullethell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name != "Player1_tama_shooting_Type2(Clone)")
+        if (gameObject.name != "Player1_tama_shooting_Type2(Clone)" && gameObject.name != "Player2_tama_shooting_Type2(Clone)")
         {
             transform.position += transform.up * 8 * Time.deltaTime;
         }
-        if(bound_count >= 4)
+        if (bound_count >= 4)
         {
             Destroy(gameObject);
         }
@@ -49,6 +55,10 @@ public class bullethell : MonoBehaviour
     {
         
         if (gameObject.name == "Player1_tama_shooting_Type2(Clone)")
+        {
+            bound_count += 1;
+        }
+        else if(gameObject.name == "Player2_tama_shooting_Type2 1Clone)")
         {
             bound_count += 1;
         }

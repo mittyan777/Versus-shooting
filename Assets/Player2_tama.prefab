@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 583774780905233601}
   - component: {fileID: -3963947907714458327}
   - component: {fileID: 5981697277970845350}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player2_tama
   m_TagString: tama
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

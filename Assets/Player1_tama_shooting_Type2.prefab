@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 180159459067630739}
   - component: {fileID: 5492659214169590247}
   - component: {fileID: 557146270684754789}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Player1_tama_shooting_Type2
   m_TagString: tama
   m_Icon: {fileID: 0}
