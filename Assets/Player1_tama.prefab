@@ -102,6 +102,8 @@ MonoBehaviour:
   distance: 0
   damage: 10
   Player1: 1
+  hansya_Sound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 85324124f3df7a7499e35f30b898381e, type: 3}
 --- !u!58 &180159459067630739
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

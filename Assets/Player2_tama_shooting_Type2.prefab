@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 180159459067630739}
   - component: {fileID: 5492659214169590247}
   - component: {fileID: 557146270684754789}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Player2_tama_shooting_Type2
   m_TagString: tama
   m_Icon: {fileID: 0}
@@ -165,3 +165,5 @@ MonoBehaviour:
   distance: 0
   damage: 10
   Player1: 0
+  hansya_Sound: {fileID: 8300000, guid: b8172d1a5bdac074d996b3635dbd782f, type: 3}
+  shootSound: {fileID: 8300000, guid: 85324124f3df7a7499e35f30b898381e, type: 3}

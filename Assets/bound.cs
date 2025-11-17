@@ -16,6 +16,7 @@ public class bound : MonoBehaviour
     Text a;
     [SerializeField] float Damage_Time = 0;
     [SerializeField] GameObject Explosion;
+
     float Damage = 0;
     void Start()
     {

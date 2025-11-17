@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1422593829068790221}
   - component: {fileID: 2615247070014336866}
   - component: {fileID: 8017904675673847665}
+  - component: {fileID: 9196326186197602411}
   m_Layer: 6
   m_Name: Damage
   m_TagString: Untagged
@@ -156,6 +157,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!223 &9196326186197602411
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214644381587941486}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
 --- !u!1 &3570880524643099704
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +468,8 @@ MonoBehaviour:
     type: 3}
   Damage_Time: 0
   Damagetext: {fileID: 2615247070014336866}
+  defenseSound: {fileID: 8300000, guid: da9a0e63beb756e40a5d2cec673bc1b3, type: 3}
+  itemSound: {fileID: 8300000, guid: 63576ae8318f5a74fb5235abc0181c41, type: 3}
 --- !u!114 &6858247714448482481
 MonoBehaviour:
   m_ObjectHideFlags: 0

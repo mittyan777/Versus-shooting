@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 8710755108727041209}
   - component: {fileID: 5958854593383737184}
   - component: {fileID: 4755893520577158261}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ PolygonCollider2D:
     m_Bits: 4294967295
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 14327
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295

@@ -12,6 +12,7 @@ public class Title_start : MonoBehaviour
     bool fade = false;
     [SerializeField]GameObject fade_obj;
     [SerializeField]float fade_Collar = 1;
+    [SerializeField] GameObject Credit;
     // Start is called before the first frame update
     void Start()
     {
@@ -92,5 +93,13 @@ public class Title_start : MonoBehaviour
             pad.dpad.down.wasPressedThisFrame ||
             pad.dpad.left.wasPressedThisFrame ||
             pad.dpad.right.wasPressedThisFrame;
+    }
+    public void crediton()
+    {
+        Credit.SetActive(true);
+    }
+    public void creditof()
+    {
+        Credit.SetActive(false);
     }
 }

@@ -33,6 +33,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]TextMeshProUGUI Damagetext;
     float aim = 200;
     Animator animator;
+    [SerializeField] AudioClip defenseSound;
+    [SerializeField] AudioClip itemSound;
 
     void Awake()
     {
@@ -41,19 +43,69 @@ public class PlayerControl : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        move = value.Get<Vector2>();
+        if (GameObject.Find("gamemanager").GetComponent<GameManager>().resultStarted == false)
+        {
+            move = value.Get<Vector2>();
+        }
     }
 
     public void OnLook(InputValue value)
     {
-        move2 = value.Get<Vector2>();
+        if (GameObject.Find("gamemanager").GetComponent<GameManager>().resultStarted == false)
+        {
+            move2 = value.Get<Vector2>();
+        }
     }
     public void OnFire(InputValue value)
     {
-        shootingvalue = value.Get<float>();
-        if (shootType == 0)
+        if (GameObject.Find("gamemanager").GetComponent<GameManager>().resultStarted == false)
         {
-            if (shootingvalue == 1)
+            shootingvalue = value.Get<float>();
+            if (shootType == 0)
+            {
+                if (shootingvalue == 1)
+                {
+                    if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
+                    {
+                        Instantiate(Player1_tama, Player1_shootPos.transform.position, this.transform.rotation);
+                        flagtime = 0.1f;
+                    }
+                    else if (gameObject.name == "Player2(Clone)" && flagtime <= 0)
+                    {
+                        Instantiate(Player2_tama, Player2_shootPos.transform.position, this.transform.rotation);
+                        flagtime = 0.1f;
+                    }
+                }
+            }
+            else if (shootType == 1)
+            {
+                Rapid_fire_flag = true;
+
+            }
+            else if (shootType == 2)
+            {
+
+                if (shootingvalue == 1)
+                {
+                    if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
+                    {
+                        Instantiate(shootType2_tama, Player1_shootPos.transform.position, this.transform.rotation);
+                        flagtime = 0.1f;
+                    }
+                    else if (gameObject.name == "Player2(Clone)" && flagtime <= 0)
+                    {
+                        Instantiate(shootType2_tama, Player2_shootPos.transform.position, this.transform.rotation);
+                        flagtime = 0.1f;
+                    }
+                }
+            }
+        }
+    }
+    void Rapid_fire()
+    {
+        if (GameObject.Find("gamemanager").GetComponent<GameManager>().resultStarted == false)
+        {
+            if (Rapid_fire_flag == true)
             {
                 if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
                 {
@@ -66,48 +118,10 @@ public class PlayerControl : MonoBehaviour
                     flagtime = 0.1f;
                 }
             }
-        }
-        else if(shootType == 1)
-        {
-            Rapid_fire_flag = true;
-          
-        }
-        else if (shootType == 2)
-        {
-           
-            if (shootingvalue == 1)
+            if (shootingvalue == 0)
             {
-                if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
-                {
-                    Instantiate(shootType2_tama, Player1_shootPos.transform.position, this.transform.rotation);
-                    flagtime = 0.1f;
-                }
-                else if (gameObject.name == "Player2(Clone)" && flagtime <= 0)
-                {
-                    Instantiate(shootType2_tama, Player2_shootPos.transform.position, this.transform.rotation);
-                    flagtime = 0.1f;
-                }
+                Rapid_fire_flag = false;
             }
-        }
-    }
-    void Rapid_fire()
-    {
-        if (Rapid_fire_flag == true)
-        {
-            if (gameObject.name == "Player1(Clone)" && flagtime <= 0)
-            {
-                Instantiate(Player1_tama, Player1_shootPos.transform.position, this.transform.rotation);
-                flagtime = 0.1f;
-            }
-            else if (gameObject.name == "Player2(Clone)" && flagtime <= 0)
-            {
-                Instantiate(Player2_tama, Player2_shootPos.transform.position, this.transform.rotation);
-                flagtime = 0.1f;
-            }
-        }
-        if(shootingvalue == 0)
-        {
-            Rapid_fire_flag = false;
         }
       
     }
@@ -200,11 +214,21 @@ public class PlayerControl : MonoBehaviour
         {
             float MoveX = move.x;
             float MoveY = move.y;
+            Debug.Log(MoveX);
             transform.position += Vector3.right * MoveX * 6 * Time.deltaTime;
             transform.position += Vector3.up * MoveY * 6 * Time.deltaTime;
-            if (MoveX > 0) { GetComponent<SpriteRenderer>().sprite = Player1[1]; }
-            if (MoveX == 0) { GetComponent<SpriteRenderer>().sprite = Player1[0]; }
-            if (MoveX < 0) { GetComponent<SpriteRenderer>().sprite = Player1[2]; }
+            if (MoveX == 0)
+            {
+                GetComponent<SpriteRenderer>().sprite = Player1[0];
+            }
+            else if (MoveX > 0.5f) 
+            {
+                GetComponent<SpriteRenderer>().sprite = Player1[1];
+            }
+            else if (MoveX < -0.5f) 
+            { 
+                GetComponent<SpriteRenderer>().sprite = Player1[2]; 
+            }
             float MoveX2 = move2.x;
             transform.eulerAngles -= transform.forward * MoveX2 * aim * Time.deltaTime;
         }
@@ -214,9 +238,18 @@ public class PlayerControl : MonoBehaviour
             float MoveY = move.y;
             transform.position -= Vector3.right * MoveX * 6 * Time.deltaTime;
             transform.position -= Vector3.up * MoveY * 6 * Time.deltaTime;
-            if (MoveX > 0) { GetComponent<SpriteRenderer>().sprite = Player2[1]; }
-            if (MoveX == 0) { GetComponent<SpriteRenderer>().sprite = Player2[0]; }
-            if (MoveX < 0) { GetComponent<SpriteRenderer>().sprite = Player2[2]; }
+            if (MoveX == 0)
+            {
+                GetComponent<SpriteRenderer>().sprite = Player2[0];
+            }
+            else if (MoveX > 0.5f) 
+            {
+                GetComponent<SpriteRenderer>().sprite = Player2[1]; 
+            }
+            else if (MoveX < -0.5) 
+            {
+                GetComponent<SpriteRenderer>().sprite = Player2[2]; 
+            }
             float MoveX2 = move2.x;
             transform.eulerAngles -= transform.forward * MoveX2 * aim * Time.deltaTime;
         }
@@ -274,80 +307,99 @@ public class PlayerControl : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "tama")
+        if (GameObject.Find("gamemanager").GetComponent<GameManager>().resultStarted == false)
         {
-            if (barrier == false)
+            if (collision.gameObject.tag == "tama")
             {
-                HP -= Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
-                Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-0.15f, 0.15f), Damagetext.rectTransform.localPosition.y, Damagetext.rectTransform.localPosition.z);
-                animator.SetBool("damage",true);
-                Damage += Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage); 
-                Damage_Time = 1;
-                Destroy(collision.gameObject);
+                if (barrier == false)
+                {
+                    HP -= Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
+                    Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-0.15f, 0.15f), Damagetext.rectTransform.localPosition.y, Damagetext.rectTransform.localPosition.z);
+                    animator.SetBool("damage", true);
+                    Damage += Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
+                    Damage_Time = 1;
+                    Destroy(collision.gameObject);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(defenseSound, transform.position, 1);
+                    Destroy(collision.gameObject);
+                }
+
             }
-            else
-            {
-                Destroy(collision.gameObject);
-            }
-            
         }
     
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "kaihuku")
+        if (GameObject.Find("gamemanager").GetComponent<GameManager>().resultStarted == false)
         {
-            HP += 30;
-            Destroy(collision.gameObject);
-        }
-        if(collision.gameObject.tag == "shooting_Type1")
-        {
-            shootType = 1;
-            shootType_reset_count = 10;
-            Destroy(collision.gameObject);
-        }
-        if (collision.gameObject.tag == "shooting_Type2")
-        {
-            shootType = 2;
-            shootType_reset_count = 10;
-            Destroy(collision.gameObject);
-        }
-        if (collision.gameObject.tag == "Barrier")
-        {
-            Barrier.SetActive(true);
-            barrier = true;
-            Invoke("BarrierOF", 5);
-            Destroy(collision.gameObject);
-        }
-        if (collision.gameObject.tag == "tama")
-        {
-            if (barrier == false)
+            if (collision.gameObject.tag == "kaihuku")
             {
-                HP -= Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage); 
-                animator.SetBool("damage", true);
-                Damage_Time = 1;
-                Damage += Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
-                
+                HP += 30;
+                AudioSource.PlayClipAtPoint(itemSound, transform.position, 1);
                 Destroy(collision.gameObject);
             }
-            else
+            if (collision.gameObject.tag == "shooting_Type1")
             {
+                shootType = 1;
+                shootType_reset_count = 10;
+                AudioSource.PlayClipAtPoint(itemSound, transform.position, 1);
                 Destroy(collision.gameObject);
             }
-
-        }
-
-        if (collision.gameObject.name == "Obstacle(Clone)")
-        {
-
-            CircleCollider2D myCol = GetComponent<CircleCollider2D>();
-            BoxCollider2D playerCol = collision.gameObject.GetComponent<BoxCollider2D>();
-
-            if (myCol != null && playerCol != null)
+            if (collision.gameObject.tag == "shooting_Type2")
             {
-                Physics2D.IgnoreCollision(myCol, playerCol, true);
+                shootType = 2;
+                shootType_reset_count = 10;
+                AudioSource.PlayClipAtPoint(itemSound, transform.position, 1);
+                Destroy(collision.gameObject);
+            }
+            if (collision.gameObject.tag == "Barrier")
+            {
+                Barrier.SetActive(true);
+                barrier = true;
+                AudioSource.PlayClipAtPoint(itemSound, transform.position, 1);
+                Invoke("BarrierOF", 5);
+                Destroy(collision.gameObject);
+            }
+            if (collision.gameObject.tag == "tama")
+            {
+                if (barrier == false)
+                {
+                    HP -= Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
+                    animator.SetBool("damage", true);
+                    Damage_Time = 1;
+                    Damage += Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
+
+                    Destroy(collision.gameObject);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(defenseSound, transform.position, 1);
+                    Destroy(collision.gameObject);
+                }
+
             }
 
+            if (collision.gameObject.name == "Obstacle(Clone)")
+            {
+                if (barrier == false)
+                {
+                    HP -= 30;
+                    Damage += 30;
+                    Damage_Time = 1;
+                    animator.SetBool("damage", true);
+
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(defenseSound, transform.position, 1);
+                }
+                Instantiate(Explosion, collision.transform.position, Quaternion.identity);
+                Destroy(collision.gameObject);
+
+
+            }
         }
     }
     void BarrierOF()
