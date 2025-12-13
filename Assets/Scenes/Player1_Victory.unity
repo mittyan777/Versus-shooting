@@ -431,7 +431,7 @@ MonoBehaviour:
   Player_V: {fileID: 1422723816}
   Player_V_text: {fileID: 996132585}
   fade: {fileID: 1986826193}
-  Player_V_gocount: 3
+  Player_V_gocount: 0.5
 --- !u!4 &405006271
 Transform:
   m_ObjectHideFlags: 0

@@ -71,7 +71,7 @@ public class bullethell : MonoBehaviour
                 bound_count += 1;
                 AudioSource.PlayClipAtPoint(hansya_Sound, transform.position,1);
             }
-            else if (gameObject.name == "Player2_tama_shooting_Type2 1Clone)")
+            if (gameObject.name == "Player2_tama_shooting_Type2(Clone)")
             {
                 bound_count += 1;
                 AudioSource.PlayClipAtPoint(hansya_Sound, transform.position,1);
