@@ -314,7 +314,7 @@ public class PlayerControl : MonoBehaviour
                 if (barrier == false)
                 {
                     HP -= Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
-                    Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-0.15f, 0.15f), Damagetext.rectTransform.localPosition.y, Damagetext.rectTransform.localPosition.z);
+                    Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-0.15f, 0.15f), Random.Range(-0.8f, 0.9f), Damagetext.rectTransform.localPosition.z);
                     animator.SetBool("damage", true);
                     Damage += Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
                     Damage_Time = 1;
@@ -368,6 +368,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     HP -= Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
                     animator.SetBool("damage", true);
+                    Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-0.15f, 0.15f), Random.Range(-0.8f, 0.9f), Damagetext.rectTransform.localPosition.z);
                     Damage_Time = 1;
                     Damage += Mathf.Floor(collision.gameObject.GetComponent<bullethell>().damage);
 
@@ -385,6 +386,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (barrier == false)
                 {
+                    Damagetext.rectTransform.localPosition = new Vector3(Random.Range(-0.15f, 0.15f), Random.Range(-0.8f, 0.9f), Damagetext.rectTransform.localPosition.z);
                     HP -= 30;
                     Damage += 30;
                     Damage_Time = 1;
