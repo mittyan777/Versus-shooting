@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
             Player_star[0].SetActive(true);
             Player_star[1].SetActive(true);
             Round = 1;
+           
             Invoke("Player1Scene", 5);
             player1_count = 0;
             player2_count = 0;
@@ -147,6 +148,7 @@ public class GameManager : MonoBehaviour
             Player2_star[0].SetActive(true);
             Player2_star[1].SetActive(true);
             Round = 1;
+          
             Invoke("Player2Scene", 5);
             player1_count = 0;
             player2_count = 0;
@@ -205,7 +207,10 @@ public class GameManager : MonoBehaviour
             player1_count++;
             
             Round++;
-            Invoke("MainScene", 5);
+            if (player2_count != 2 && player1_count != 2)
+            {
+                Invoke("MainScene", 5);
+            }
             yield return new WaitForSeconds(2f);
             fade = true;
             Referee_Text[0].SetActive(false);
@@ -229,7 +234,10 @@ public class GameManager : MonoBehaviour
             player2_count++;
            
             Round++;
-            Invoke("MainScene", 5);
+            if (player2_count != 2 && player1_count != 2)
+            {
+                Invoke("MainScene", 5);
+            }
             yield return new WaitForSeconds(2f);
             fade = true;
             Referee_Text[1].SetActive(false);
