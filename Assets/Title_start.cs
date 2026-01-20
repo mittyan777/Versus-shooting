@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,9 @@ public class Title_start : MonoBehaviour
     [SerializeField]GameObject fade_obj;
     [SerializeField]float fade_Collar = 1;
     [SerializeField] GameObject Credit;
+    int currentConnectionCount = 0;
+    [SerializeField] GameObject message;
+    [SerializeField]TextMeshProUGUI controller_count;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,17 +47,38 @@ public class Title_start : MonoBehaviour
            fade = true;
         }
 
-        if (Gamepad.current == null) return;
+        //if (Gamepad.current == null) return;
 
         var pad = Gamepad.current;
 
-        // どれかのボタンが押されたら
-        if (Gamepad.current != null && AnyGamepadButtonPressed(Gamepad.current))
+        if (currentConnectionCount == 2)
         {
-            Debug.Log("何かのボタンが押された！");
-            Game_start();
+            // どれかのボタンが押されたら
+            if (Gamepad.current != null && AnyGamepadButtonPressed(Gamepad.current))
+            {
+                Debug.Log("何かのボタンが押された！");
+                Game_start();
+            }
+            message.SetActive(false);
         }
-        if(fade == true)
+        else
+        {
+            message.SetActive(true);
+            controller_count.text = ($"{currentConnectionCount}/2");
+        }
+
+            string[] cName = Input.GetJoystickNames();
+        currentConnectionCount = 0;
+        for (int i = 0; i < cName.Length; i++)
+        {
+            if (cName[i] != "")
+            {
+                currentConnectionCount++;
+            }
+        }
+        Debug.Log(currentConnectionCount);
+
+        if (fade == true)
         {
             if (fade_Collar <= 1)
             {
@@ -69,6 +94,11 @@ public class Title_start : MonoBehaviour
             }
         }
         fade_obj.GetComponent<Image>().color = new Color(0, 0, 0, fade_Collar);
+
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
     public void Game_start()
     {
